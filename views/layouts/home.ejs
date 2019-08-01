@@ -1,0 +1,83 @@
+<%- contentFor('body') %>
+
+<style>
+
+</style>
+
+<div class="row" id="docker"></div>
+<div class="row">
+  <canvas id="canvas-pdf" ></canvas>
+</div>
+<div class="row center-align">
+  <button class="btn-floating green" id="back"><i class="material-icons">arrow_back</i></button>
+  <button class="btn-floating green" id="forward"><i class="material-icons">arrow_forward</i></button>
+</div>
+<div>
+    <div class="fixed-action-btn" >
+        <a class="btn-floating btn-large black">
+          <i class="large material-icons">apps</i>
+        </a>
+        <ul>
+          <li><a class="btn-floating green" id="camera"><i class="material-icons">camera</i></a></li>
+          <li><a class="btn-floating green" id="next"><i class="material-icons">navigate_next</i></a></li>
+          <li><a class="btn-floating green" id="maximize"><i class="material-icons">aspect_ratio</i></a></li>
+          <li><a class="btn-floating blue" id="file-upload"><i class="material-icons">file_upload</i></a></li>
+        </ul>
+      </div>
+            
+</div>
+<div>
+  <video id="video" style="display: none"></video>
+ 
+  <canvas id="canvas" style="display: none"></canvas>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/handtrackjs/dist/handtrack.min.js"> </script>
+<!--<script src="javascripts/hands.js"></script>-->
+
+<script src="javascripts/pdfjs/build/pdf.js"></script>
+<script src="javascripts/viewer.js"></script>
+
+
+
+
+<script>
+
+  const fileUpload=document.getElementById('file-upload');
+  const maximize=document.getElementById('maximize');
+  const camera=document.getElementById('camera');
+  const docker=document.getElementById('docker')
+  const btnBack=document.getElementById('back');
+  const btnForward=document.getElementById('forward');
+
+  let zoom;
+  let maxi;
+  //let next=1;
+  this.pageIndex=1;
+
+  
+fileUpload.addEventListener('click',()=>{
+  const inputFile=document.createElement('input');
+  inputFile.type="file";
+  inputFile.click();
+  inputFile.addEventListener('change',(e)=>{
+
+    let  fileURL=window.URL.createObjectURL(e.target.files[0]);
+    
+    myPDFViewer(fileURL)
+
+   
+  })
+
+})
+
+
+
+window.onload=()=>{
+    let elems = document.querySelectorAll('.fixed-action-btn');
+    let instances = M.FloatingActionButton.init(elems, {});
+  }
+
+</script>
